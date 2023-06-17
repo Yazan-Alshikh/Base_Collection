@@ -1,0 +1,17 @@
+Map<String, String> en_EN = {
+  "successApi": 'SUCCESS',
+  "noContent": 'No Content',
+  "badRequest": 'Bad request try again later',
+  "forbidden": 'Forbidden request try again later',
+  "unauthorized": 'User is unauthorised try again later',
+  "notFound": 'Error not found',
+  "unProcessableEntity": '',
+  "internalServerError": 'Something went wrong try again later',
+  "connectTimeOut": 'Time out error try again later',
+  "cancelApi": 'Request was cancelled try again later',
+  "receiveTimeout": 'time out error try again later',
+  "sendTimeOut": 'time out error try again later',
+  "cacheError": 'cache error try again later',
+  'noInternetConnecting': 'Please check your internet connection',
+  "unknown": 'Something went wrong try again later',
+};
