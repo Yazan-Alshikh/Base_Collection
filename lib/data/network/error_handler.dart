@@ -78,7 +78,7 @@ extension DataSourceExtension on DataSource {
             code: ResponseCode.unknown, message: ResponseMessage.unknown.tr);
       case DataSource.unProcessableEntity:
         return Failure(
-            code: ResponseCode.unprocessableEntity,
+            code: ResponseCode.unProcessableEntity,
             message: ResponseMessage.unProcessableEntity.tr);
     }
   }
@@ -88,7 +88,7 @@ class ErrorHandler implements Exception {
   late Failure failure;
 
   ErrorHandler.handle(dynamic error) {
-    if (error is DioError) {
+    if (error is DioException) {
       failure = _handleError(error);
     } else {
       failure = DataSource.unknown.getFailure();
@@ -96,39 +96,50 @@ class ErrorHandler implements Exception {
   }
 }
 
-Failure _handleError(DioError error) {
+Failure _handleError(DioException error) {
   switch (error.type) {
-    case DioErrorType.connectTimeout:
+    case DioExceptionType.connectionTimeout:
       return DataSource.connectTimeOut.getFailure();
-    case DioErrorType.sendTimeout:
+    case DioExceptionType.sendTimeout:
       return DataSource.sendTimeOut.getFailure();
-    case DioErrorType.receiveTimeout:
+    case DioExceptionType.receiveTimeout:
       return DataSource.receiveTimeOut.getFailure();
-    case DioErrorType.response:
-      if (error.response != null &&
-          error.response!.statusCode != null &&
-          error.response!.statusMessage != null) {
-        if (error.response!.statusCode == 422) {
-          return Failure(
-              code: error.response!.statusCode ?? 0,
-              message: error.response!.data['message']);
-        } else if (error.response!.statusCode! < 422 &&
-            error.response!.statusCode! >= 400) {
-          return Failure(
-              code: error.response!.statusCode!,
-              message: error.response!.data['message']);
+    case DioExceptionType.cancel:
+      return DataSource.cancel.getFailure();
+    case DioExceptionType.unknown:
+      return DataSource.unknown.getFailure();
+    case DioExceptionType.badCertificate:
+      return DataSource.unknown.getFailure();
+    case DioExceptionType.connectionError:
+      return DataSource.noInternetConnection.getFailure();
+    case DioExceptionType.badResponse:
+      if (error.response?.statusCode == ResponseCode.badRequest) {
+        return DataSource.badRequest.getFailure();
+      } else if (error.response?.statusCode == ResponseCode.forbidden) {
+        return DataSource.forbidden.getFailure();
+      } else if (error.response?.statusCode == ResponseCode.unauthorized) {
+        return DataSource.unAuthorised.getFailure();
+      } else if (error.response?.statusCode == ResponseCode.notFound) {
+        return DataSource.notFound.getFailure();
+      } else if (error.response?.statusCode ==
+          ResponseCode.internalServerError) {
+        return DataSource.internalServerError.getFailure();
+      } else if (error.response?.statusCode ==
+          ResponseCode.unProcessableEntity) {
+        if (error.response?.data != null) {
+          if (error.response?.data['message'] != null) {
+            return Failure(
+                code: ResponseCode.unProcessableEntity,
+                message: error.response?.data['message']);
+          } else {
+            return DataSource.unProcessableEntity.getFailure();
+          }
         } else {
-          return Failure(
-              code: error.response!.statusCode ?? 0,
-              message: error.response!.statusMessage ?? "");
+          return DataSource.unProcessableEntity.getFailure();
         }
       } else {
         return DataSource.unknown.getFailure();
       }
-    case DioErrorType.cancel:
-      return DataSource.cancel.getFailure();
-    case DioErrorType.other:
-      return DataSource.unknown.getFailure();
   }
 }
 
@@ -139,7 +150,7 @@ class ResponseCode {
   static const int forbidden = 403;
   static const int unauthorized = 401;
   static const int notFound = 404;
-  static const int unprocessableEntity = 404;
+  static const int unProcessableEntity = 422;
   static const int internalServerError = 500;
 
   // local status code
@@ -176,4 +187,3 @@ class ApiInternalStatus {
   static const int success = 1;
   static const int failure = 0;
 }
-

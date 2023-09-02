@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
-
-class AppRoutes {}
+class AppRoutes {
+  static const String splashRoute = '/';
+}
 
 List<GetPage> pages = [];

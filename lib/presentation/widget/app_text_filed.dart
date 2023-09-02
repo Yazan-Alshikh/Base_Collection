@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 
 class AppTextFiled extends StatelessWidget {
-  String label;
-  String? hint;
-  TextInputAction? action;
-  TextInputType? keyboardType;
-  bool? isPassword;
-  void Function()? onTap;
-  void Function(String?)? onChanged;
-  TextEditingController? controller;
-  String? Function(String?)? validator;
-  IconData? prefixIcon;
-  IconData? suffixIcon;
-  void Function()? onSuffixIcon;
-  double? width;
-  double? height;
-  bool? isSvg;
-  String? svgPrefixIcon;
-  TextDirection? textDirection;
-  String? suffixText;
-  bool isSuffixText;
-  AutovalidateMode? autoValidateMode;
+  final String label;
+  final String? hint;
+  final TextInputAction? action;
+  final TextInputType? keyboardType;
+  final bool? isPassword;
+  final void Function()? onTap;
+  final void Function(String?)? onChanged;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
+  final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final void Function()? onSuffixIcon;
+  final double? width;
+  final double? height;
+  final bool? isSvg;
+  final String? svgPrefixIcon;
+  final TextDirection? textDirection;
+  final String? suffixText;
+  final bool isSuffixText;
+  final AutovalidateMode? autoValidateMode;
 
-  AppTextFiled(
+  const AppTextFiled(
       {super.key,
       required this.label,
       this.hint,

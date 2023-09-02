@@ -1,13 +1,12 @@
-
 import 'package:base_collection/Presentation/Resources/color_manger.dart';
 import 'package:base_collection/Presentation/Resources/values_manger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppBackButton extends StatelessWidget {
-  AppBackButton({this.onTap, super.key});
+  const AppBackButton({this.onTap, super.key});
 
-  void Function()? onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {

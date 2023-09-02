@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class AppImage extends StatelessWidget {
-  double? height;
-  double? width;
-  BoxFit? boxFit;
-  String imageUrl;
-  bool? withBaseUrl;
-  bool? errorLogo;
+  final double? height;
+  final double? width;
+  final BoxFit? boxFit;
+  final String imageUrl;
+  final bool? withBaseUrl;
+  final bool? errorLogo;
 
-  AppImage(
+  const AppImage(
       {super.key,
       required this.imageUrl,
       this.width,

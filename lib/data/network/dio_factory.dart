@@ -9,7 +9,6 @@ const String contentType = "Content-Type";
 const String accept = "Accept";
 
 class DioFactory {
-
   Future<Dio> getDio() async {
     Dio dio = Dio();
     Map<String, String> headers = {
@@ -19,8 +18,8 @@ class DioFactory {
     dio.options = BaseOptions(
         baseUrl: Constants.baseUrl,
         headers: headers,
-        receiveTimeout: Constants.apiTimeOut,
-        sendTimeout: Constants.apiTimeOut);
+        receiveTimeout: const Duration(seconds: Constants.apiTimeOut),
+        sendTimeout: const Duration(seconds: Constants.apiTimeOut));
 
     if (!kReleaseMode) {
       dio.interceptors.add(PrettyDioLogger(

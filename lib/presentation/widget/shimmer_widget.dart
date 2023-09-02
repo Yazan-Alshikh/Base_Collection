@@ -1,4 +1,4 @@
-import 'package:base_collection/presentation/Resources/color_manger.dart';
+import 'package:base_collection/Presentation/Resources/color_manger.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 

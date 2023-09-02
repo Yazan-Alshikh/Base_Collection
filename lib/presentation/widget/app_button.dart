@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'custom_text.dart';
 
 class AppButton extends StatelessWidget {
-  double? width;
-  double? height;
-  Color? color;
-  double? borderRadios;
-  String text;
-  TextStyle textStyle;
-  void Function()? onTap;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final double? borderRadios;
+  final String text;
+  final TextStyle textStyle;
+  final void Function()? onTap;
 
-  AppButton(
+  const AppButton(
       {super.key,
       required this.text,
       required this.textStyle,

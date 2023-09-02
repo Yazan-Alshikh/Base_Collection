@@ -1,3 +1,4 @@
+import 'package:base_collection/presentation/resources/routes_manger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,17 +19,14 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => GetMaterialApp(
-            title: "APP_NAME",
-            useInheritedMediaQuery: true,
-            // getPages: pages,
-            // initialRoute: AppRoutes.splashRoute,
-            debugShowCheckedModeBanner: false,
-          )
+    return GetMaterialApp(
+      title: "APP_NAME",
+      useInheritedMediaQuery: true,
+      getPages: pages,
+      initialRoute: AppRoutes.splashRoute,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
